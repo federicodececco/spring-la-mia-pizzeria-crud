@@ -7,26 +7,29 @@
   <body>
     <div th:replace="~{fragments/navbar :: navbar}"></div>
     <div class="container">
-    <h1>Pizze</h1>
-    <table th:if="${pizzas.size>0}" class="table">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Descrizione</th>
-          <th>prezzo</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr th:each="pizza : ${pizzas}" th:object="${pizza}">
-          <td> <a th:href="@{/pizzas/{id}(id=*{id})}">[[*{name}]]</a></td>
-          <td>[[*{description}]]</td>
-          <td>[[*{price}]]</td>
-        </tr>
-      </tbody>
-    </table>
-    <p  th:text="no pizza 4 u" th:unless="${pizzas.size>0}"/>
+      <form th:action="@{/pizzas/search}" method="get">
+        <input type="text" name="name" placeholder="cerca" th:value="${param.name}"/>
+        <button type="submit"> Searc</button>
+      </form>
+      <h1>Pizze</h1>
+      <table th:if="${pizzas.size>0}" class="table">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Descrizione</th>
+            <th>prezzo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="pizza : ${pizzas}" th:object="${pizza}">
+            <td><a th:href="@{/pizzas/{id}(id=*{id})}">[[*{name}]]</a></td>
+            <td>[[*{description}]]</td>
+            <td>[[*{price}]]</td>
+          </tr>
+        </tbody>
+      </table>
+      <p th:text="no pizza 4 u" th:unless="${pizzas.size>0}" />
     </div>
-    
 
     <div th:replace="~{fragments/resources :: scripts}"></div>
   </body>
