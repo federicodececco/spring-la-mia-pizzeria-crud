@@ -92,6 +92,6 @@ public class Pizza {
     @Override
     public String toString() {
 
-        return String.format(" id:", id, " name:", name, " price:", String.valueOf(price));
+        return String.format("id = '%d', name = '%s', price = '%.2f'",id,name,price);
     }
 }

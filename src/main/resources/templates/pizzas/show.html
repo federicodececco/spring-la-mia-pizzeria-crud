@@ -8,7 +8,7 @@
     <div th:replace="~{fragments/navbar :: navbar}"></div>
     <div class="container">
     <h1>Pizze</h1>
-    <table th:if="${pizzas.size>0}" class="table">
+    <table class="table">
       <thead>
         <tr>
           <th>Nome</th>
@@ -17,14 +17,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr th:each="pizza : ${pizzas}" th:object="${pizza}">
+        <tr  th:object="${pizza}">
           <td>[[*{name}]]</td>
           <td>[[*{description}]]</td>
           <td>[[*{price}]]</td>
         </tr>
       </tbody>
     </table>
-    <p  th:text="no pizza 4 u" th:unless="${pizzas.size>0}"/>
+
     </div>
     
 
