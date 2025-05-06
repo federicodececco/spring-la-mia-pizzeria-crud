@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.*;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/pizzas")
@@ -24,10 +25,20 @@ public class PizzaController {
         model.addAttribute("pizzas", pizzas);
         return "pizzas/index";
     }
+
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") Integer id, Model model){
+    public String show(@PathVariable("id") Integer id, Model model) {
         Pizza pizza = repository.findById(id).get();
-        model.addAttribute("pizza",pizza);
-        return "pizzas/show"; 
+        model.addAttribute("pizza", pizza);
+        return "pizzas/show";
     }
+
+    @GetMapping("/search")
+    public String search(@RequestParam(name = "name") String name, Model model) {
+
+        List<Pizza> pizzas = repository.findByNameContaining(name);
+        model.addAttribute("pizzas" , pizzas);
+        return "pizzas/index";
+    }
+
 }
