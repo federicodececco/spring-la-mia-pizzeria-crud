@@ -1,0 +1,16 @@
+<!doctype html>
+<html xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <title>Pizza</title>
+    <div th:replace="~{fragment/resources :: head}"></div>
+  </head>
+  <body>
+    <div th:replace="~{fragment/navbar :: navbar}"></div>
+
+    <p th:text="${pizzas}"></p>
+
+
+
+    <div th:replace="~{fragment/resources :: scripts}"></div>
+  </body>
+</html>
