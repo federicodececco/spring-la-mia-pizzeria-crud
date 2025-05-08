@@ -30,7 +30,7 @@ public class Pizza {
 
     private String photoUrl;
 
-    @NotNull
+    @NotNull(message = "price cannot be empty")
     @Min(value = 0,message = "price cannot be negative")
     private Double price;
 
