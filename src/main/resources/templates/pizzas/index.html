@@ -1,37 +1,24 @@
 <!doctype html>
 <html xmlns:th="https://www.thymeleaf.org">
-  <head>
-    <title>Pizza</title>
-   
-    <div th:replace="~{fragments/resources :: head}"></div>
-  </head>
 
+<head>
+  <title>Pizza</title>
 
+  <div th:replace="~{fragments/resources :: head}"></div>
+</head>
 
-
-
-
-  <body>
-    <div th:replace="~{fragments/navbar :: navbar}"></div>
-    <main class="container">
-      <div class="mb-3 d-flex">
-        <a
-          th:href="@{/pizzas/create}"
-          class="me-auto btn btn-primary btn-sm"
-          href=""
-        >
-          Aggiungi una pizza
-        </a>
-      </div>
+<body>
+  <div th:replace="~{fragments/navbar :: navbar}"></div>
+  <main class="container">
+    <div class="mb-3 d-flex">
+      <a th:href="@{/pizzas/create}" class="me-auto btn btn-primary btn-sm" href="">
+        Aggiungi una pizza
+      </a>
+    </div>
     <div class="container">
       <form th:action="@{/pizzas/search}" method="get">
-        <input
-          type="text"
-          name="name"
-          placeholder="cerca"
-          th:value="${param.name}"
-        />
-        <button type="submit">Searc</button>
+        <input type="text" name="name" placeholder="cerca" th:value="${param.name}" />
+        <button type="submit">Search</button>
       </form>
       <h1>Pizze</h1>
       <table th:if="${pizzas.size>0}" class="table">
@@ -47,6 +34,22 @@
             <td><a th:href="@{/pizzas/{id}(id=*{id})}">[[*{name}]]</a></td>
             <td>[[*{description}]]</td>
             <td>[[*{price}]]</td>
+            <td>
+              <form th:action="@{/pizzas/{id}/order(id=${pizza.id})}" method="get">
+                <button type="submit" class="btn btn-primary btn-sm">Ordina </button>
+              </form>
+              <!-- <a th:href="@{/pizzas/{id}(id=${pizza.id})/order}">Ordina</a> -->
+            </td>
+            <td>
+              <form th:action="@{/pizzas/edit/{id}(id=${pizza.id})}" method="get">
+                <button type="submit" class="btn btn-warning btn-sm">Modifica </button>
+              </form>
+            </td>
+            <td>
+              <form th:action="@{/pizzas/delete/{id}(id=${pizza.id})}" method="post">
+                <button type="submit" class="btn btn-danger btn-sm">Rimuovi</button>
+              </form>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -55,5 +58,6 @@
 
     <div th:replace="~{fragments/resources :: scripts}"></div>
   </main>
-  </body>
+</body>
+
 </html>

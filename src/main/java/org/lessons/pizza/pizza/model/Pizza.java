@@ -1,11 +1,14 @@
 package org.lessons.pizza.pizza.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -31,8 +34,11 @@ public class Pizza {
     private String photoUrl;
 
     @NotNull(message = "price cannot be empty")
-    @Min(value = 0,message = "price cannot be negative")
+    @Min(value = 0, message = "price cannot be negative")
     private Double price;
+
+    @OneToMany(mappedBy = "pizza")
+    private List<Order> orders;
 
     /* constructors */
     public Pizza(int id, String name, String description, String photoUrl, Double price) {
@@ -69,6 +75,10 @@ public class Pizza {
         return price;
     }
 
+    public List<Order> getOrders() {
+        return orders;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -92,6 +102,6 @@ public class Pizza {
     @Override
     public String toString() {
 
-        return String.format("id = '%s', name = '%s', price = '%.2f'",String.valueOf(id),name,price);
+        return String.format("id = '%s', name = '%s', price = '%.2f'", String.valueOf(id), name, price);
     }
 }
